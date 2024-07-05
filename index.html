@@ -5,32 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cars Enthusiast</title>
-    <script async src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"></script>
+    <script async src="https://securepubads.g.doubleclick.net/tag/js/gpt.js" crossorigin="anonymous"></script>
     <script>
         window.googletag = window.googletag || { cmd: [] };
 
         let interstitialSlot;
 
         googletag.cmd.push(() => {
-            // Define a web interstitial ad slot.
-            interstitialSlot = googletag.defineOutOfPageSlot(
-                "/21974715207/interstitial-test",
-                googletag.enums.OutOfPageFormat.INTERSTITIAL,
-            );
-
-            // Slot returns null if the page or device does not support interstitials.
-            if (interstitialSlot) {
-                // Enable optional interstitial triggers and register the slot.
-                interstitialSlot.addService(googletag.pubads()).setConfig({
-                    interstitial: {
-                        triggers: {
-                            navBar: false,
-                            unhideWindow: false,
-                        },
-                    },
-                });
-            }
-
             // Define ad slots.
             googletag
                 .defineSlot('/21974715207/web-tft-leaderboard-right-banner-l', [300, 600], "banner-ad")
@@ -45,17 +26,46 @@
                 .defineSlot('/21974715207/web-tft-champion-native', ['fluid'], 'div-gpt-ad-1713969330814-2')
                 .addService(googletag.pubads());
 
+            // Define a web interstitial ad slot.
+            interstitialSlot = googletag.defineOutOfPageSlot(
+                "/21974715207/interstitial-test",
+                googletag.enums.OutOfPageFormat.INTERSTITIAL,
+            );
+
+            // Slot returns null if the page or device does not support interstitials.
+            if (interstitialSlot) {
+                // Enable optional interstitial triggers and register the slot.
+                interstitialSlot.addService(googletag.pubads()).setConfig({
+                    interstitial: {
+                        triggers: {
+                            onScroll: true,
+                            onIdle: 30,
+                            onExit: true
+                        },
+                    },
+                });
+
+                document.getElementById("status").textContent = "Interstitial is loading...";
+
+                // Add event listener to enable navigation once the interstitial loads.
+                // If this event doesn't fire, try clearing local storage and refreshing
+                // the page.
+                googletag.pubads().addEventListener("slotOnload", (event) => {
+                    if (interstitialSlot === event.slot) {
+                        document.getElementById("link").style.display = "block";
+                        document.getElementById("status").textContent = "Interstitial is loaded.";
+                    }
+                });
+
+                // By default, the detected language of the current page is used to render
+                // interstitial UI elements. This behavior can be overridden by manually
+                // specifying the document language:
+                // googletag.pubads().set("document_language", "en");
+            }
+
             // Enable SRA and services.
             googletag.pubads().enableSingleRequest();
             googletag.enableServices();
-
-            // Event listener for ad response.
-            googletag.pubads().addEventListener('slotRenderEnded', function (event) {
-                // Ensure the ad slot is displayed if an ad is loaded.
-                if (event.slot.getSlotElementId() === 'div-gpt-ad-1713969330814-0' && !event.isEmpty) {
-                    document.getElementById('div-gpt-ad-1713969330814-0').style.display = 'block';
-                }
-            });
         });
     </script>
 
@@ -72,8 +82,8 @@
                         <li><a href="#sedans">Sedans</a></li>
                         <li><a href="#suvs">SUVs</a></li>
                         <li><a href="#sports">Sports Cars</a></li>
-                        <li><a href="electric.html">Electric Cars</a></li>
-                        <li><a href="trucks.html">Trucks</a></li>
+                        <li><a href="#electric">Electric Cars</a></li>
+                        <li><a href="#trucks">Trucks</a></li>
                     </ul>
                 </nav>
             </header>
@@ -121,6 +131,20 @@
                 </p>
             </section>
 
+            <section id="electric">
+                <h2>Electric Cars</h2>
+                <p>Electric cars are the future of transportation, offering sustainable and efficient solutions for
+                    modern drivers. Explore the latest models, technology, and benefits of going electric. <a
+                        href="electric.html">Learn more about Electric Cars</a></p>
+            </section>
+
+            <section id="trucks">
+                <h2>Trucks</h2>
+                <p>Trucks are built for power and utility, making them perfect for heavy-duty tasks and adventurous
+                    lifestyles. Discover the different types of trucks, their capabilities, and how they can serve your
+                    needs. <a href="trucks.html">Learn more about Trucks</a></p>
+            </section>
+
             <footer>
                 <p>Contact us: info@carsenthusiast.com</p>
             </footer>
@@ -136,6 +160,22 @@
                 });
             </script>
         </div>
+    </div>
+    <div class="content">
+        <span id="status">Web interstitial is not supported on this page.</span>
+        <p>
+            <a id="link" href="https://www.example.com/">TRIGGER INTERSTITIAL</a>
+        </p>
+        <p>
+            <!--
+        You can prevent specific links from triggering GPT-managed web
+        interstials by adding a data-google-interstitial="false" attribute to
+        the anchor element or any ancestor of the anchor element.
+      -->
+            <a data-google-interstitial="false" href="https://www.example.com/">
+                This link will never trigger an interstitial
+            </a>
+        </p>
     </div>
     <script>
         googletag.cmd.push(() => {
