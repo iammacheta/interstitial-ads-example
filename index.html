@@ -78,13 +78,17 @@
 
         function displayInterstitialSlot() {
             if (interstitialSlot) {
-                googletag.display(interstitialSlot);
+                googletag.cmd.push(() => {
+                    googletag.display(interstitialSlot);
+                });
             }
         }
 
         function displayInterstitialDirectSlot() {
             if (interstitialDirectSlot) {
-                googletag.display(interstitialDirectSlot);
+                googletag.cmd.push(() => {
+                    googletag.display(interstitialDirectSlot);
+                });
             }
         }
     </script>
