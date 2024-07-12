@@ -10,17 +10,10 @@
         window.googletag = window.googletag || { cmd: [] };
 
         let interstitialSlot;
-        let interstitialDirectSlot;
 
         googletag.cmd.push(() => {
             // Define a web interstitial ad slot.
             interstitialSlot = googletag.defineOutOfPageSlot(
-                "/21974715207/web-tft-selected-transitions-interstitial",
-                googletag.enums.OutOfPageFormat.INTERSTITIAL,
-            );
-
-            // Define a web interstitial direct test ad slot.
-            interstitialDirectSlot = googletag.defineOutOfPageSlot(
                 "/21974715207/web-interstitial-direct-test",
                 googletag.enums.OutOfPageFormat.INTERSTITIAL,
             );
@@ -29,18 +22,6 @@
             if (interstitialSlot) {
                 // Enable optional interstitial triggers and register the slot.
                 interstitialSlot.addService(googletag.pubads()).setConfig({
-                    interstitial: {
-                        triggers: {
-                            navBar: false,
-                            unhideWindow: false,
-                        },
-                    },
-                });
-            }
-
-            if (interstitialDirectSlot) {
-                // Enable optional interstitial triggers and register the slot.
-                interstitialDirectSlot.addService(googletag.pubads()).setConfig({
                     interstitial: {
                         triggers: {
                             navBar: false,
@@ -75,22 +56,6 @@
                 }
             });
         });
-
-        function displayInterstitialSlot() {
-            if (interstitialSlot) {
-                googletag.cmd.push(() => {
-                    googletag.display(interstitialSlot);
-                });
-            }
-        }
-
-        function displayInterstitialDirectSlot() {
-            if (interstitialDirectSlot) {
-                googletag.cmd.push(() => {
-                    googletag.display(interstitialDirectSlot);
-                });
-            }
-        }
     </script>
 
     <link rel="stylesheet" type="text/css" href="styles.css" />
@@ -106,8 +71,8 @@
                         <li><a href="#sedans">Sedans</a></li>
                         <li><a href="#suvs">SUVs</a></li>
                         <li><a href="#sports">Sports Cars</a></li>
-                        <li><a href="electric.html" onclick="displayInterstitialSlot()">Electric Cars</a></li>
-                        <li><a href="trucks.html" onclick="displayInterstitialDirectSlot()">Trucks</a></li>
+                        <li><a href="electric.html">Electric Cars</a></li>
+                        <li><a href="trucks.html">Trucks</a></li>
                     </ul>
                 </nav>
             </header>
@@ -159,15 +124,14 @@
                 <h2>Electric Cars</h2>
                 <p>Electric cars are the future of transportation, offering sustainable and efficient solutions for
                     modern drivers. Explore the latest models, technology, and benefits of going electric. <a
-                        href="electric.html" onclick="displayInterstitialSlot()">Learn more about Electric Cars</a></p>
+                        href="electric.html">Learn more about Electric Cars</a></p>
             </section>
 
             <section id="trucks">
                 <h2>Trucks</h2>
                 <p>Trucks are built for power and utility, making them perfect for heavy-duty tasks and adventurous
                     lifestyles. Discover the different types of trucks, their capabilities, and how they can serve your
-                    needs. <a href="trucks.html" onclick="displayInterstitialDirectSlot()">Learn more about Trucks</a>
-                </p>
+                    needs. <a href="trucks.html">Learn more about Trucks</a></p>
             </section>
 
             <footer>
@@ -186,6 +150,14 @@
             </script>
         </div>
     </div>
+    <script>
+        googletag.cmd.push(() => {
+            // Ensure the first call to display comes after static ad slot
+            // divs are defined. If you do not have any static ad slots, this
+            // call can be made immediately after services are enabled.
+            googletag.display(interstitialSlot);
+        });
+    </script>
 </body>
 
 </html>
