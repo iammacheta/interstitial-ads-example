@@ -14,7 +14,7 @@
         googletag.cmd.push(() => {
             // Define a web interstitial ad slot.
             interstitialSlot = googletag.defineOutOfPageSlot(
-                "/21974715207/web-interstitial-direct-test",
+                "/71161633,21974715207/MBLTC_mobalytics/mobile_interstitial",
                 googletag.enums.OutOfPageFormat.INTERSTITIAL,
             );
 
@@ -31,30 +31,10 @@
                 });
             }
 
-            // Define ad slots.
-            googletag
-                .defineSlot('/21974715207/web-tft-leaderboard-right-banner-l', [300, 600], "banner-ad")
-                .addService(googletag.pubads());
-            googletag
-                .defineSlot('/21974715207/test-native', ['fluid'], 'div-gpt-ad-1713969330814-0')
-                .addService(googletag.pubads());
-            googletag
-                .defineSlot('/21974715207/web-tft-comp-dropdown-native', ['fluid'], 'div-gpt-ad-1713969330814-1')
-                .addService(googletag.pubads());
-            googletag
-                .defineSlot('/21974715207/web-tft-champion-native', ['fluid'], 'div-gpt-ad-1713969330814-2')
-                .addService(googletag.pubads());
 
             // Enable services.
             googletag.enableServices();
 
-            // Event listener for ad response.
-            googletag.pubads().addEventListener('slotRenderEnded', function (event) {
-                // Ensure the ad slot is displayed if an ad is loaded.
-                if (event.slot.getSlotElementId() === 'div-gpt-ad-1713969330814-0' && !event.isEmpty) {
-                    document.getElementById('div-gpt-ad-1713969330814-0').style.display = 'block';
-                }
-            });
         });
     </script>
 
@@ -83,30 +63,6 @@
                     for a
                     reliable everyday vehicle.</p>
             </section>
-
-            <div class="native-ad" id="div-gpt-ad-1713969330814-0"></div>
-            <script>
-                googletag.cmd.push(() => {
-                    // Request and render an ad for the "div-gpt-ad-1713969330814-0" slot.
-                    googletag.display("div-gpt-ad-1713969330814-0");
-                });
-            </script>
-
-            <div class="native-ad" id="div-gpt-ad-1713969330814-1"></div>
-            <script>
-                googletag.cmd.push(() => {
-                    // Request and render an ad for the "div-gpt-ad-1713969330814-1" slot.
-                    googletag.display("div-gpt-ad-1713969330814-1");
-                });
-            </script>
-
-            <div class="native-ad" id="div-gpt-ad-1713969330814-2"></div>
-            <script>
-                googletag.cmd.push(() => {
-                    // Request and render an ad for the "div-gpt-ad-1713969330814-2" slot.
-                    googletag.display("div-gpt-ad-1713969330814-2");
-                });
-            </script>
 
             <section id="suvs">
                 <h2>SUVs</h2>
@@ -139,16 +95,6 @@
             </footer>
         </div>
 
-        <div class="ads">
-            <h3>Display 300x600</h3>
-            <div id="banner-ad"></div>
-            <script>
-                googletag.cmd.push(() => {
-                    // Request and render an ad for the "banner-ad" slot.
-                    googletag.display("banner-ad");
-                });
-            </script>
-        </div>
     </div>
     <script>
         googletag.cmd.push(() => {
