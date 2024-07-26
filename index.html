@@ -1,17 +1,11 @@
-<!doctype html>
-<!--
- @license
- Copyright 2022 Google LLC. All Rights Reserved.
- SPDX-License-Identifier: Apache-2.0
--->
-<html>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Display a GPT-managed web interstitial ad." />
-    <title>Display a web interstitial ad</title>
-    <script async src="https://securepubads.g.doubleclick.net/tag/js/gpt.js" crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cars Enthusiast</title>
+    <script async src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"></script>
     <script>
         window.googletag = window.googletag || { cmd: [] };
 
@@ -27,76 +21,79 @@
             // Slot returns null if the page or device does not support interstitials.
             if (interstitialSlot) {
                 // Enable optional interstitial triggers and register the slot.
-                interstitialSlot.addService(googletag.pubads()).setConfig({
+                interstitialSlot.addService(googletag.pubads().setTargeting('transition', '1')).setConfig({
                     interstitial: {
                         triggers: {
-                            navBar: true,
-                            unhideWindow: true,
+                            navBar: false,
+                            unhideWindow: false,
                         },
                     },
                 });
-
-                document.getElementById("status").textContent = "Interstitial is loading...";
-
-                // Add event listener to enable navigation once the interstitial loads.
-                // If this event doesn't fire, try clearing local storage and refreshing
-                // the page.
-                googletag.pubads().addEventListener("slotOnload", (event) => {
-                    if (interstitialSlot === event.slot) {
-                        document.getElementById("link").style.display = "block";
-                        document.getElementById("status").textContent = "Interstitial is loaded.";
-                    }
-                });
-
-                // By default, the detected language of the current page is used to render
-                // interstitial UI elements. This behavior can be overridden by manually
-                // specifying the document language:
-                // googletag.pubads().set("document_language", "en");
             }
 
-            // Define static ad slots.
-
-            // Enable SRA and services.
-            googletag.pubads().enableSingleRequest();
+            // Enable services.
             googletag.enableServices();
         });
     </script>
-    <style>
-        #link {
-            display: none;
-        }
-
-        div.content {
-            position: fixed;
-            top: 50%;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="styles.css" />
 </head>
 
 <body>
-    <div id="static-ad-1" style="width: 100px; height: 100px"></div>
-    <div class="content">
-        <span id="status">Web interstitial is not supported on this page.</span>
-        <p>
-            <a id="link" href="https://www.example.com/">TRIGGER INTERSTITIAL</a>
-        </p>
-        <p>
-            <!--
-          You can prevent specific links from triggering GPT-managed web
-          interstials by adding a data-google-interstitial="false" attribute to
-          the anchor element or any ancestor of the anchor element.
-        -->
-            <a data-google-interstitial="false" href="https://www.example.com/">
-                This link will never trigger an interstitial
-            </a>
-        </p>
+    <div class="root">
+        <div class="content">
+            <header>
+                <h1>Welcome to Cars Enthusiast</h1>
+                <nav>
+                    <ul>
+                        <li><a href="#sedans">Sedans</a></li>
+                        <li><a href="#suvs">SUVs</a></li>
+                        <li><a href="#sports">Sports Cars</a></li>
+                        <li><a href="electric.html">Electric Cars</a></li>
+                        <li><a href="trucks.html">Trucks</a></li>
+                    </ul>
+                </nav>
+            </header>
+
+            <section id="sedans">
+                <h2>Sedans</h2>
+                <p>Sedans offer a great balance of comfort and performance. Ideal for families and individuals looking
+                    for a reliable everyday vehicle.</p>
+            </section>
+
+            <section id="suvs">
+                <h2>SUVs</h2>
+                <p>SUVs provide ample space and power, perfect for off-road adventures or large family outings.</p>
+            </section>
+
+            <section id="sports">
+                <h2>Sports Cars</h2>
+                <p>Sports cars deliver high performance and sleek design, tailored for speed enthusiasts and a thrilling
+                    drive.</p>
+            </section>
+
+            <section id="electric">
+                <h2>Electric Cars</h2>
+                <p>Electric cars are the future of transportation, offering sustainable and efficient solutions for
+                    modern drivers. Explore the latest models, technology, and benefits of going electric. <a
+                        href="electric.html">Learn more about Electric Cars</a></p>
+            </section>
+
+            <section id="trucks">
+                <h2>Trucks</h2>
+                <p>Trucks are built for power and utility, making them perfect for heavy-duty tasks and adventurous
+                    lifestyles. Discover the different types of trucks, their capabilities, and how they can serve your
+                    needs. <a href="trucks.html">Learn more about Trucks</a></p>
+            </section>
+
+            <footer>
+                <p>Contact us: info@carsenthusiast.com</p>
+            </footer>
+        </div>
     </div>
     <script>
         googletag.cmd.push(() => {
-            // Ensure the first call to display comes after static ad slot
-            // divs are defined. If you do not have any static ad slots, this
-            // call can be made immediately after services are enabled.
-            googletag.display(interstitialSlot);
+            // Display the interstitial ad slot.
+            googletag.display(interstitialSlot.getSlotElementId());
         });
     </script>
 </body>
